@@ -13,7 +13,7 @@ const app = express();
 const config = require("./config")
 config(app);
 
-// ℹ️ Middleware that establishes a database connection. Ensures the connection is created on every request, including in serverless deployments.
+// ℹ️ Middleware that establishes a database connection. Ensures the connection is created on every request. Required for serverless deployments.
 const connectDB = require("./db");
 app.use(async (req, res, next) => {
   await connectDB()
@@ -21,7 +21,7 @@ app.use(async (req, res, next) => {
 })
 
 // ℹ️ Test Route. Can be left and used for waking up the server if idle
-router.get("/", (req, res, next) => {
+app.get("/", (req, res, next) => {
   res.json("All good in here");
 });
 
